@@ -255,7 +255,7 @@ type SidebarLink = {
 export const SIDEBAR_LINKS: SidebarLink[] = [
     { title: 'Dashboard', iconName: 'HomeIcon', page: 'dashboard', roles: ['admin', 'contractor'] },
     { title: 'Projects', iconName: 'FileContractIcon', page: 'projects', roles: ['admin', 'contractor'] },
-    // { title: 'My Applications', iconName: 'FileAltIcon', page: 'applications', roles: ['contractor'] },
+    { title: 'My Applications', iconName: 'FileAltIcon', page: 'applications', roles: ['contractor'] },
     { title: 'Clients', iconName: 'UsersIcon', page: 'clients', roles: ['admin'] },
     { title: 'Team', iconName: 'UsersIcon', page: 'team', roles: ['admin'] },
     { title: 'Tasks', iconName: 'CheckCircleIcon', page: 'tasks', roles: ['admin', 'contractor'] },
