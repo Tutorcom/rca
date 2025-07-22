@@ -31,7 +31,7 @@ const iconMap: { [key: string]: React.FC<any> } = {
 const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setCollapsed, currentPage, setCurrentPage }) => {
   const { user } = useAuth();
   
-  const NavLink = ({ link }: { link: (typeof SIDEBAR_LINKS)[0] }) => {
+  const NavLink: React.FC<{ link: (typeof SIDEBAR_LINKS)[0] }> = ({ link }) => {
     const Icon = iconMap[link.iconName];
     if (!user || !link.roles.includes(user.role)) return null;
 
