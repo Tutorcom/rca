@@ -2,9 +2,9 @@ import React from 'react';
 import StatCard from '../components/StatCard';
 import { useAuth } from '../contexts/AuthContext';
 import { Activity, Project, User, Task, Invoice, Page } from '../types';
-import { FileContractIcon, UsersIcon, CheckCircleIcon, ClockIcon, BillingIcon, FileAltIcon, BellIcon, CalendarAltIcon } from '../components/icons';
+import { FileContractIcon, UsersIcon, CheckCircleIcon, ClockIcon, BillingIcon, FileAltIcon, CalendarAltIcon } from '../components/icons';
 import ActivityFeed from '../components/ActivityFeed';
-import { isBefore, addDays, differenceInDays } from 'date-fns';
+import { isAfter, isBefore, addDays, differenceInDays } from 'date-fns';
 
 interface DashboardPageProps {
     activities: Activity[];
@@ -84,7 +84,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ activities, projects, use
         .filter(i => i.status === 'sent' && isBefore(new Date(i.dueDate), oneWeekFromNow))
          .map(i => ({
             type: 'invoice' as const,
-            title: `Invoice #2024-00${i.id}`,
+            title: `Invoice #${2024-00}${i.id}`,
             isOverdue: isBefore(new Date(i.dueDate), now),
             dueText: getDueText(new Date(i.dueDate)),
             page: 'billing' as Page,

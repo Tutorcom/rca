@@ -72,7 +72,7 @@ const ProjectBoard: React.FC<ProjectBoardProps> = ({ projects, onStatusChange })
     
     return (
         <div className="flex gap-4 overflow-x-auto pb-4">
-            {statusColumns.map(({ id, title }) => (
+            {statusColumns.map(({ id }) => (
                 <ProjectBoardColumn 
                     key={id}
                     status={id}

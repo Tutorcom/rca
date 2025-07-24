@@ -1,7 +1,6 @@
 import React from 'react';
 import ProtectedRoute from '../components/ProtectedRoute';
 import { User, Task, Project } from '../types';
-import { UsersIcon } from '../components/icons';
 
 interface TeamPageProps {
   admins: User[];

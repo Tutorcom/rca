@@ -42,7 +42,7 @@ const ClientActions: React.FC<{ user: User, onApprove: () => void, onSendMessage
 
 const ClientManagementPage: React.FC<ClientManagementPageProps> = ({ users, setUserStatus, setCurrentPage, onClientSelect }) => {
     
-    const handleSendMessage = (userId: number) => {
+    const handleSendMessage = (_userId: number) => {
         // In a real app, you might set the active conversation here
         setCurrentPage('messages');
     }

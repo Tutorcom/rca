@@ -1,6 +1,6 @@
 import React from 'react';
-import { User, Project, Task, Invoice, Page } from '../types';
-import { ArrowLeftIcon, BadgeCheckIcon, BillingIcon, BuildingIcon, CheckCircleIcon, FileContractIcon, MailIcon, UsersIcon } from '../components/icons';
+import { User, Project, Task, Invoice } from '../types';
+import { ArrowLeftIcon, CheckCircleIcon, FileContractIcon, MailIcon } from '../components/icons';
 
 interface ClientDetailPageProps {
     client: User;

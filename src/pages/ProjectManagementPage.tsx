@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Project, ProjectStatus } from '../types';
 import ProjectCard from '../components/ProjectCard';
 import ProjectBoard from '../components/ProjectBoard';
-import { SearchIcon, FileContractIcon, UsersIcon } from '../components/icons';
+import { SearchIcon } from '../components/icons';
 
 interface ProjectManagementPageProps {
   projects: Project[];
