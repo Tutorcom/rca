@@ -8,49 +8,51 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        heading: ['Inter', 'sans-serif'], // Changed to Inter for consistency
       },
       colors: {
         primary: {
-          DEFAULT: '#5D5FEF',
-          hover: '#4b4ded',
-          light: '#F0F0FF',
+          DEFAULT: '#CC0000', // Rosado Red
+          hover: '#A30000',   // Darker red for hover
+          light: '#FEE2E2',   // Light red for backgrounds
         },
+        secondary: '#374151', // Dark grey for secondary actions
         danger: {
-          DEFAULT: '#F7685B',
-          light: '#FDEEEE',
-          dark: '#D94B4B',
+          DEFAULT: '#EF4444', // Red-500
+          light: '#FEE2E2',   // Red-100
+          dark: '#B91C1C',    // Red-800
         },
         success: {
-          DEFAULT: '#2ED47A',
-          light: '#EAFBF1',
-          dark: '#25A962',
+          DEFAULT: '#22C55E', // Green-500
+          light: '#DCFCE7',   // Green-100
+          dark: '#166534',    // Green-800
         },
-        warning: { // On Hold
-          DEFAULT: '#FFB648',
-          light: '#FFF6E9',
-          dark: '#D8942A',
+        warning: {
+          DEFAULT: '#F59E0B', // Amber-500
+          light: '#FEF3C7',   // Amber-100
+          dark: '#92400E',    // Amber-800
         },
-        info: { // Processing
-          DEFAULT: '#8B5CF6',
-          light: '#F5F3FF',
-          dark: '#7C3AED',
+        info: { // This will be the "Processing" purple
+          DEFAULT: '#8B5CF6', // Violet-500
+          light: '#F5F3FF',   // Violet-100
+          dark: '#6D28D9',    // Violet-700
         },
-        transit: { // In Transit
-          DEFAULT: '#38BDF8',
-          light: '#E0F2FE',
-          dark: '#0EA5E9'
+        sky: { // For "In Transit" or "Opportunity"
+          DEFAULT: '#38BDF8', // Sky-400
+          light: '#E0F2FE',   // Sky-100
+          dark: '#075985',    // Sky-800
         },
         slate: {
-          50: '#FDFDFD',
-          100: '#F7F7F9', // Page background
-          200: '#E9E9EC', // Borders, dividers
-          300: '#D5D5D9',
-          400: '#A0A0A0', // Light text
-          500: '#757575', // Body text
-          600: '#525252', // Subheadings
-          700: '#454545', // Headings
-          800: '#272727', // Darker elements
-          900: '#151515'
+          50: '#F8FAFC',   // Lightest background (page bg)
+          100: '#F1F5F9',  // Light UI elements, input bg
+          200: '#E2E8F0',  // Borders, dividers
+          300: '#CBD5E1',  // Input borders
+          400: '#9CA3AF',  // Medium-light text
+          500: '#6B7280',  // Body text, icons
+          600: '#4B5563',  // Subheadings
+          700: '#374151',  // Headings
+          800: '#1F2937',  // Darker headings
+          900: '#0F172A'   // Darkest elements
         }
       },
       animation: {

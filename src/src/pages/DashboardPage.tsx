@@ -84,7 +84,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ activities, projects, use
         .filter(i => i.status === 'sent' && isBefore(new Date(i.dueDate), oneWeekFromNow))
          .map(i => ({
             type: 'invoice' as const,
-            title: `Invoice #2024-00${i.id}`,
+            title: `Invoice #${2024-0o0}${i.id}`,
             isOverdue: isBefore(new Date(i.dueDate), now),
             dueText: getDueText(new Date(i.dueDate)),
             page: 'billing' as Page,

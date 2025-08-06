@@ -49,7 +49,7 @@ export async function generateAiContent(user: User, projects: Project[], questio
             },
         });
         
-        return response.text ?? 'I encountered an error while processing your request. Please try again later.';
+        return response.text ?? '';
     } catch (error) {
         console.error('Error calling Gemini API:', error);
         // Provide a user-friendly error message

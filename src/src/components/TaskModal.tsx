@@ -22,7 +22,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ isOpen, onClose, onSubmit, projec
         alert("Please fill out all fields.");
         return;
     }
-    onSubmit({ title, projectId: Number(projectId), assignedTo: Number(assignedTo), dueDate });
+    onSubmit({ title, projectId, assignedTo, dueDate });
     // Reset form
     setTitle('');
     setProjectId('');
