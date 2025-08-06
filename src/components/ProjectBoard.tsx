@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Project, ProjectStatus } from '../types';
+import type { Project, ProjectStatus } from '../types';
 import ProjectCard from './ProjectCard';
 
 interface ProjectBoardProps {

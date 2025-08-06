@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Project, Task, Invoice } from '../types';
+import type { User, Project, Task, Invoice } from '../types';
 import { ArrowLeftIcon, CheckCircleIcon, FileContractIcon, MailIcon } from '../components/icons';
 
 interface ClientDetailPageProps {

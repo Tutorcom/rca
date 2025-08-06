@@ -1,5 +1,5 @@
 import React from 'react';
-import { Project } from '../types';
+import type { Project } from '../types';
 import { CloseIcon, FilePdfIcon } from './icons';
 
 interface ApplicationModalProps {
@@ -35,7 +35,7 @@ const ApplicationModal: React.FC<ApplicationModalProps> = ({ isOpen, onClose, pr
             <div className="mb-6">
                 <h3 className="font-semibold text-slate-700 mb-2">Please review the following documents before submitting your proposal:</h3>
                 <ul className="space-y-2">
-                    {project.relatedDocuments.map((doc, index) => (
+                    {project.relatedDocuments.map((doc: { name: string; url: string }, index: number) => (
                         <li key={index} className="flex items-center">
                            <a href={doc.url} target="_blank" rel="noopener noreferrer" className="flex items-center p-2 rounded-md hover:bg-primary-light w-full transition-colors">
                              <FilePdfIcon className="w-6 h-6 text-danger flex-shrink-0" />

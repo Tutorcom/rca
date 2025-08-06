@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { ChatMessage, User } from '../types';
+import type { ChatMessage, User } from '../types';
 import { PaperAirplaneIcon, MailIcon, SparklesIcon } from '../components/icons';
 import { generateAiContent } from '../services/geminiService';
 
@@ -23,11 +23,11 @@ const MessagesPage: React.FC<MessagesPageProps> = ({ messages, onSendMessage }) 
   if (!user) return null;
 
   // For contractors, there's only one conversation partner: the first admin
-  const adminId = users.find(u => u.role === 'admin')?.id || 0;
+  const adminId = users.find((u: User) => u.role === 'admin')?.id || 0;
   
   const conversationPartners = user.role === 'admin' 
-    ? users.filter(u => u.role === 'contractor')
-    : users.filter(u => u.id === adminId);
+    ? users.filter((u: User) => u.role === 'contractor')
+    : users.filter((u: User) => u.id === adminId);
 
   // Set default active conversation
   useEffect(() => {
@@ -36,7 +36,7 @@ const MessagesPage: React.FC<MessagesPageProps> = ({ messages, onSendMessage }) 
     }
   }, [conversationPartners, activeConversationId]);
   
-  const activePartner = users.find(u => u.id === activeConversationId);
+  const activePartner = users.find((u: User) => u.id === activeConversationId);
 
   const getConversationId = (userId1: number, userId2: number) => {
     const ids = [userId1, userId2].sort();
@@ -93,7 +93,7 @@ const MessagesPage: React.FC<MessagesPageProps> = ({ messages, onSendMessage }) 
                     <h2 className="font-bold text-slate-700">Conversations</h2>
                 </div>
                 <div className="flex-1 p-2 space-y-1 overflow-y-auto">
-                    {conversationPartners.map(p => <ConversationListItem key={p.id} partner={p} />)}
+                    {conversationPartners.map((p: User) => <ConversationListItem key={p.id} partner={p} />)}
                 </div>
             </div>
 
@@ -114,7 +114,7 @@ const MessagesPage: React.FC<MessagesPageProps> = ({ messages, onSendMessage }) 
                              {activeMessages.map(msg => (
                                 <div key={msg.id} className={`flex gap-3 items-end ${msg.senderId === user.id ? 'justify-end' : 'justify-start'}`}>
                                     {msg.senderId !== user.id && (
-                                        <div className="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center text-slate-600 font-bold flex-shrink-0">{users.find(u=>u.id===msg.senderId)?.avatar}</div>
+                                        <div className="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center text-slate-600 font-bold flex-shrink-0">{users.find((u: User)=>u.id===msg.senderId)?.avatar}</div>
                                     )}
                                     <div className={`max-w-md p-3 rounded-lg ${msg.senderId === user.id ? 'bg-primary text-white rounded-br-none' : 'bg-white text-slate-700 shadow-sm rounded-bl-none'}`}>
                                         <p className="text-sm whitespace-pre-wrap">{msg.text}</p>

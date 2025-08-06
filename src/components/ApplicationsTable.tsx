@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Application, ApplicationStatus } from '../types';
+import type { Application, ApplicationStatus } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 
 interface ApplicationsTableProps {
@@ -7,13 +7,13 @@ interface ApplicationsTableProps {
   setApplicationStatus?: (appId: number, status: ApplicationStatus) => void;
 }
 
-const statusStyles: { [key in ApplicationStatus]: string } = {
+const statusClasses: { [key in ApplicationStatus]: string } = {
   approved: 'bg-success-light text-success-dark',
   review: 'bg-info-light text-info-dark',
   update: 'bg-warning-light text-warning-dark',
   rejected: 'bg-danger-light text-danger-dark',
   draft: 'bg-slate-200 text-slate-600',
-  submitted: 'bg-blue-200 text-blue-800'
+  submitted: 'bg-sky-light text-sky-dark'
 };
 
 const getStatusText = (status: ApplicationStatus) => {
@@ -34,7 +34,10 @@ const AdminActions: React.FC<{ app: Application, setApplicationStatus: (appId: n
                 Manage
             </button>
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 z-10">
+                <div 
+                    className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg py-1 z-10 animate-fade-in-up"
+                    onMouseLeave={() => setIsOpen(false)}
+                >
                    <button onClick={() => handleStatusChange('approved')} className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Approve</button>
                    <button onClick={() => handleStatusChange('rejected')} className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Reject</button>
                    <button onClick={() => handleStatusChange('review')} className="block w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">To Review</button>
@@ -57,27 +60,27 @@ const ApplicationsTable: React.FC<ApplicationsTableProps> = ({ applications, set
       <table className="w-full text-sm text-left text-slate-500">
         <thead className="text-xs text-slate-700 uppercase bg-slate-50">
           <tr>
-            <th scope="col" className="px-6 py-3">Contract Title</th>
-            <th scope="col" className="px-6 py-3">Contractor</th>
-            <th scope="col" className="px-6 py-3">Date Applied</th>
-            <th scope="col" className="px-6 py-3">Status</th>
-            <th scope="col" className="px-6 py-3">Action</th>
+            <th scope="col" className="px-6 py-4">Contract Title</th>
+            <th scope="col" className="px-6 py-4">Contractor</th>
+            <th scope="col" className="px-6 py-4">Date Applied</th>
+            <th scope="col" className="px-6 py-4">Status</th>
+            <th scope="col" className="px-6 py-4 text-right">Action</th>
           </tr>
         </thead>
         <tbody>
           {applications.map((app) => (
-            <tr key={app.id} className="bg-white border-b hover:bg-slate-50">
-              <th scope="row" className="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">
+            <tr key={app.id} className="bg-white border-b border-slate-200 hover:bg-slate-50">
+              <td scope="row" className="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">
                 {app.contractTitle}
-              </th>
+              </td>
               <td className="px-6 py-4">{app.contractor}</td>
               <td className="px-6 py-4">{formatDate(app.date)}</td>
               <td className="px-6 py-4">
-                <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${statusStyles[app.status]}`}>
+                <span className={`px-3 py-1 text-xs font-semibold rounded-full ${statusClasses[app.status]}`}>
                   {getStatusText(app.status)}
                 </span>
               </td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-4 text-right">
                 {user?.role === 'admin' && setApplicationStatus ? (
                     <AdminActions app={app} setApplicationStatus={setApplicationStatus} />
                 ) : (
@@ -89,7 +92,7 @@ const ApplicationsTable: React.FC<ApplicationsTableProps> = ({ applications, set
         </tbody>
       </table>
        {applications.length === 0 && (
-          <div className="text-center py-10 text-slate-500">
+          <div className="text-center py-16 text-slate-500">
               <p>No applications found.</p>
           </div>
       )}

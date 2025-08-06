@@ -8,50 +8,49 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        heading: ['Poppins', 'sans-serif'],
       },
       colors: {
         primary: {
-          DEFAULT: '#B91C1C', // A strong, professional red
-          hover: '#991B1B',
-          light: '#FEE2E2',
-        },
-        secondary: '#475569', // A dark slate for accents
-        accent: {
-          DEFAULT: '#64748B',
-          hover: '#475569',
+          DEFAULT: '#5D5FEF',
+          hover: '#4b4ded',
+          light: '#F0F0FF',
         },
         danger: {
-          DEFAULT: '#DC2626',
-          light: '#FEE2E2',
-          dark: '#991B1B',
+          DEFAULT: '#F7685B',
+          light: '#FDEEEE',
+          dark: '#D94B4B',
         },
         success: {
-          DEFAULT: '#16A34A',
-          light: '#DCFCE7',
-          dark: '#14532D',
+          DEFAULT: '#2ED47A',
+          light: '#EAFBF1',
+          dark: '#25A962',
         },
-        warning: {
-          DEFAULT: '#F59E0B',
-          light: '#FEF9C3',
-          dark: '#78350F',
+        warning: { // On Hold
+          DEFAULT: '#FFB648',
+          light: '#FFF6E9',
+          dark: '#D8942A',
         },
-        info: {
-          DEFAULT: '#2563EB',
-          light: '#DBEAFE',
-          dark: '#1E40AF',
+        info: { // Processing
+          DEFAULT: '#8B5CF6',
+          light: '#F5F3FF',
+          dark: '#7C3AED',
         },
-        slate: { // Used for the "smoke white" theme
-          50: '#F8FAFC',   // Lightest background
-          100: '#F1F5F9',  // Main background color
-          200: '#E2E8F0',  // Borders
-          300: '#CBD5E1',  // Lighter borders, UI elements
-          400: '#94A3B8',  // Light text, icons
-          500: '#64748B',  // Medium text
-          600: '#475569',  // Body text
-          700: '#334155',  // Subheadings
-          800: '#1E293B',  // Headings
-          900: '#0F172A'   // Darkest elements
+        transit: { // In Transit
+          DEFAULT: '#38BDF8',
+          light: '#E0F2FE',
+          dark: '#0EA5E9'
+        },
+        slate: {
+          50: '#FDFDFD',
+          100: '#F7F7F9', // Page background
+          200: '#E9E9EC', // Borders, dividers
+          300: '#D5D5D9',
+          400: '#A0A0A0', // Light text
+          500: '#757575', // Body text
+          600: '#525252', // Subheadings
+          700: '#454545', // Headings
+          800: '#272727', // Darker elements
+          900: '#151515'
         }
       },
       animation: {

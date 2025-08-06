@@ -1,5 +1,6 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { User } from '../types';
+import React, { createContext, useState, useContext } from 'react';
+import type { ReactNode } from 'react';
+import type { User } from '../types';
 import { users as allUsers } from '../constants';
 
 interface AuthContextType {
@@ -15,7 +16,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [user, setUser] = useState<User | null>(null);
 
   const login = (userId: number) => {
-    const userToLogin = allUsers.find(u => u.id === userId);
+    const userToLogin = allUsers.find((u: User) => u.id === userId);
     if (userToLogin) {
       setUser(userToLogin);
     }

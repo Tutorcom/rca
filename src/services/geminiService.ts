@@ -1,13 +1,12 @@
 import { GoogleGenAI } from "@google/genai";
-import { Project, User } from '../types';
+import type { Project, User } from '../types';
 
-// In a Vite project, environment variables are accessed via `import.meta.env`.
-// They must be prefixed with `VITE_` to be exposed to the client-side code.
-// This is managed securely by the build process.
-const apiKey = import.meta.env.VITE_API_KEY;
+// The API key is injected by Vite during build from environment variables.
+// See vite.config.ts for the `define` configuration.
+const apiKey = process.env.API_KEY;
 
 if (!apiKey) {
-    console.warn("VITE_API_KEY is not set in your .env file. AI features will be disabled.");
+    console.warn("API_KEY is not set in the environment. AI features will be disabled.");
 }
 
 const ai = new GoogleGenAI({apiKey: apiKey || "MISSING_API_KEY"});
@@ -50,7 +49,7 @@ export async function generateAiContent(user: User, projects: Project[], questio
             },
         });
         
-        return response.text ?? 'I encountered an error while processing your request. Please try again.';
+        return response.text ?? 'Sorry, I could not generate a response.';
     } catch (error) {
         console.error('Error calling Gemini API:', error);
         // Provide a user-friendly error message

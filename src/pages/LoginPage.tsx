@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { BuildingIcon, UserTieIcon, MailIcon, LockClosedIcon } from '../components/icons';
+import { LoginIcon, UsersIcon, UserTieIcon, ChevronLeftIcon, LogoIcon } from '../components/icons';
 import { useAuth } from '../contexts/AuthContext';
-import { User } from '../types';
+import type { User } from '../types';
 
 interface LoginPageProps {
     onLogin: (userId: number) => void;
@@ -9,7 +9,7 @@ interface LoginPageProps {
 
 const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     const { users } = useAuth();
-    const [role, setRole] = useState<'admin' | 'contractor'>('admin');
+    const [loginRole, setLoginRole] = useState<'admin' | 'contractor' | null>(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -17,111 +17,105 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     const handleLoginAttempt = (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
-        const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.role === role);
+        const user = users.find((u: User) => u.email.toLowerCase() === email.toLowerCase() && u.role === loginRole);
         if (user) {
+            // Password check is skipped for this simulation
             onLogin(user.id);
         } else {
             setError('Invalid credentials for the selected role.');
         }
     };
     
-    // Auto-fill form for demo purposes
-    const setCredentials = (selectedRole: 'admin' | 'contractor') => {
-        setRole(selectedRole);
+    const handleRoleSelect = (role: 'admin' | 'contractor') => {
+        setLoginRole(role);
         setError('');
-        if (selectedRole === 'admin') {
-            setEmail('antonio@rca.com');
-            setPassword('password123');
-        } else {
-            setEmail('info@coastal.com');
-            setPassword('password123');
-        }
+        setEmail('');
+        setPassword('');
+    }
+    
+    const handleBack = () => {
+        setLoginRole(null);
+        setError('');
+    }
+
+    if (!loginRole) {
+        return (
+            <div className="flex items-center justify-center min-h-screen bg-slate-50 p-4">
+                <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-xl text-center">
+                    <LogoIcon className="w-16 h-16 mx-auto text-primary mb-4" />
+                    <h1 className="text-3xl md:text-4xl font-bold text-slate-800 font-heading">DashStack</h1>
+                    <p className="text-slate-500 mt-2 mb-8">Please select your role to continue.</p>
+                    <div className="space-y-4">
+                        <button
+                            onClick={() => handleRoleSelect('admin')}
+                            className="w-full flex items-center justify-center gap-3 p-4 bg-primary text-white rounded-lg shadow-sm hover:bg-primary-hover transition-all duration-200"
+                        >
+                            <UserTieIcon className="w-6 h-6" />
+                            <span className="font-semibold text-lg">Login as Administrator</span>
+                        </button>
+                        <button
+                            onClick={() => handleRoleSelect('contractor')}
+                            className="w-full flex items-center justify-center gap-3 p-4 bg-secondary text-white rounded-lg shadow-sm hover:bg-accent transition-all duration-200"
+                        >
+                             <UsersIcon className="w-6 h-6" />
+                            <span className="font-semibold text-lg">Login as Contractor</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     return (
-        <div className="flex min-h-screen bg-slate-50">
-            {/* Left Panel */}
-            <div className="hidden lg:flex w-1/2 flex-col items-center justify-center bg-slate-800 text-white p-12">
-                <BuildingIcon className="w-20 h-20 text-primary" />
-                <h1 className="mt-6 text-4xl font-bold font-heading text-center">RCA Practice Manager</h1>
-                <p className="mt-2 text-slate-300 text-center">Your unified platform for client, project, and practice management.</p>
-            </div>
-
-            {/* Right Panel */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
-                <div className="w-full max-w-sm">
-                    <div className="lg:hidden text-center mb-8">
-                         <BuildingIcon className="w-12 h-12 text-primary mx-auto" />
-                         <h1 className="mt-4 text-3xl font-bold font-heading text-slate-800">RCA Manager</h1>
+         <div className="flex items-center justify-center min-h-screen bg-slate-50 p-4">
+            <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-xl relative">
+                <button onClick={handleBack} className="absolute top-4 left-4 flex items-center text-sm font-medium text-slate-500 hover:text-primary">
+                    <ChevronLeftIcon className="w-5 h-5"/>
+                    Back
+                </button>
+                <div className="text-center mb-8">
+                    {loginRole === 'admin' ? <UserTieIcon className="w-16 h-16 mx-auto text-primary mb-3" /> : <UsersIcon className="w-16 h-16 mx-auto text-secondary mb-3" />}
+                    <h1 className="text-3xl font-bold text-slate-800 font-heading capitalize">{loginRole} Login</h1>
+                </div>
+                
+                <form onSubmit={handleLoginAttempt} className="space-y-4">
+                    <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-slate-700">Email Address</label>
+                        <input 
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-primary focus:border-primary"
+                            placeholder={loginRole === 'admin' ? 'moni@dashstack.com' : 'info@coastal.com'}
+                            required
+                        />
+                    </div>
+                     <div>
+                        <label htmlFor="password"  className="block text-sm font-medium text-slate-700">Password</label>
+                        <input 
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:outline-none focus:ring-primary focus:border-primary"
+                            placeholder="••••••••"
+                            required
+                        />
+                         <p className="mt-1 text-xs text-slate-400">Hint: Any password will work for the simulation.</p>
                     </div>
                     
-                    <h2 className="text-2xl font-bold text-slate-800 font-heading">Sign in to your account</h2>
-                    <p className="text-slate-500 mt-1 mb-6">Welcome back! Please enter your details.</p>
+                    {error && <p className="text-sm text-danger text-center">{error}</p>}
 
-                    <div className="grid grid-cols-2 gap-2 bg-slate-200 p-1 rounded-lg mb-6">
-                        <button
-                            onClick={() => setCredentials('admin')}
-                            className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${role === 'admin' ? 'bg-white text-primary shadow-sm' : 'text-slate-500'}`}
-                        >
-                            Administrator
-                        </button>
-                        <button
-                            onClick={() => setCredentials('contractor')}
-                            className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${role === 'contractor' ? 'bg-white text-primary shadow-sm' : 'text-slate-500'}`}
-                        >
-                            Contractor / Client
-                        </button>
-                    </div>
-
-                    <form onSubmit={handleLoginAttempt} className="space-y-4">
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-slate-700">Email</label>
-                            <div className="relative mt-1">
-                                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <MailIcon className="h-5 w-5 text-slate-400" />
-                                </div>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full rounded-md border-slate-300 pl-10 shadow-sm focus:border-primary focus:ring-primary"
-                                    placeholder="you@example.com"
-                                    required
-                                />
-                            </div>
-                        </div>
-                         <div>
-                            <label htmlFor="password"  className="block text-sm font-medium text-slate-700">Password</label>
-                            <div className="relative mt-1">
-                                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <LockClosedIcon className="h-5 w-5 text-slate-400" />
-                                </div>
-                                <input 
-                                    type="password"
-                                    id="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full rounded-md border-slate-300 pl-10 shadow-sm focus:border-primary focus:ring-primary"
-                                    placeholder="••••••••"
-                                    required
-                                />
-                            </div>
-                        </div>
-                        
-                        {error && <p className="text-sm text-danger text-center font-medium">{error}</p>}
-                        
-                         <p className="text-xs text-slate-400 text-center pt-2">Hint: Any password will work. Credentials are auto-filled for this demo when you select a role.</p>
-
-                        <button
-                            type="submit"
-                            className="w-full flex items-center justify-center p-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-hover transition-colors disabled:bg-slate-400 disabled:cursor-not-allowed"
-                            disabled={!email || !password}
-                        >
-                            Sign In
-                        </button>
-                    </form>
-                </div>
+                    <button
+                        type="submit"
+                        className="w-full flex items-center justify-center gap-2 p-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary-hover transition-colors disabled:bg-slate-400"
+                        disabled={!email || !password}
+                    >
+                        <LoginIcon className="w-5 h-5" />
+                        Login
+                    </button>
+                </form>
             </div>
         </div>
     );

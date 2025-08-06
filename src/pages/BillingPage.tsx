@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Invoice, Project, User, InvoiceStatus } from '../types';
+import type { Invoice, Project, User, InvoiceStatus } from '../types';
 import { BillingIcon } from '../components/icons';
 
 interface BillingPageProps {

@@ -21,7 +21,7 @@ import NotificationModal from './components/NotificationModal';
 import ApplicationModal from './components/ApplicationModal';
 import TaskModal from './components/TaskModal';
 import { projects as initialProjects, applications as initialApplications, activities as initialActivities, documents as initialDocuments, notifications as initialNotifications, messages as initialMessages, users as allUsers, tasks as initialTasks, invoices as initialInvoices } from './constants';
-import { Project, Application, ApplicationStatus, Activity, Document, User, Notification, Page, ChatMessage, Task, Invoice, InvoiceStatus, ProjectStatus } from './types';
+import type { Project, Application, ApplicationStatus, Activity, Document, User, Notification, Page, ChatMessage, Task, Invoice, InvoiceStatus, ProjectStatus } from './types';
 
 const App: React.FC = () => {
     const { user, login } = useAuth();
@@ -275,12 +275,12 @@ const App: React.FC = () => {
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
             />
-            <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarCollapsed ? 'w-[calc(100%-5rem)] ml-20' : 'w-[calc(100%-16rem)] ml-64'}`}>
+            <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarCollapsed ? 'ml-24' : 'ml-64'}`}>
                 <Topbar 
                     notificationCount={unreadNotificationCount} 
                     onNotificationClick={() => setNotificationModalOpen(true)}
                 />
-                <main className="flex-1 p-4 lg:p-6 overflow-y-auto">
+                <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
                     {renderPage()}
                 </main>
             </div>

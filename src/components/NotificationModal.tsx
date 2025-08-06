@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './Modal';
-import { Notification } from '../types';
+import type { Notification } from '../types';
 import { BellIcon } from './icons';
 
 interface NotificationModalProps {

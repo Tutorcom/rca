@@ -1,7 +1,7 @@
 import React from 'react';
 import DocumentManager from '../components/DocumentManager';
 import { useAuth } from '../contexts/AuthContext';
-import { Document, Activity, Notification } from '../types';
+import type { Document, Activity, Notification } from '../types';
 import { BadgeCheckIcon } from '../components/icons';
 
 interface UserProfilePageProps {
@@ -67,7 +67,7 @@ const UserProfilePage: React.FC<UserProfilePageProps> = ({ documents, setDocumen
                      <h3 className="text-lg font-bold text-slate-700 font-heading mb-3">Certifications</h3>
                       {user.certifications.length > 0 ? (
                         <ul className="space-y-2">
-                            {user.certifications.map(cert => (
+                            {user.certifications.map((cert: string) => (
                                 <li key={cert} className="flex items-center text-slate-600">
                                     <BadgeCheckIcon className="w-5 h-5 text-success mr-2 flex-shrink-0" />
                                     <span>{cert}</span>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Project } from '../types';
+import type { Project } from '../types';
 import { BuildingIcon, TrendingUpIcon } from './icons';
 
 interface ProjectCardProps {
@@ -70,7 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onApply, isDraggable
                 
                 <p className="text-sm text-slate-600 mb-4 line-clamp-2">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
-                    {project.tags.map(tag => (
+                    {project.tags.map((tag: string) => (
                         <span key={tag} className="bg-slate-200 text-slate-600 px-2 py-1 text-xs font-medium rounded-full">{tag}</span>
                     ))}
                 </div>

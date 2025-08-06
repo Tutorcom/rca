@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity, ActivityType } from '../types';
+import type { Activity, ActivityType } from '../types';
 import { BellIcon, FileContractIcon, UserCheckIcon, CommentDotsIcon, CalendarAltIcon, FileUploadIcon, CheckCircleIcon, BillingIcon } from './icons';
 
 interface ActivityFeedProps {

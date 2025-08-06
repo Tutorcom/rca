@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Project, ProjectStatus } from '../types';
+import type { Project, ProjectStatus } from '../types';
 import ProjectCard from '../components/ProjectCard';
 import ProjectBoard from '../components/ProjectBoard';
 import { SearchIcon } from '../components/icons';
@@ -15,35 +15,36 @@ const ProjectManagementPage: React.FC<ProjectManagementPageProps> = ({ projects,
 
   return (
     <div>
-      <div className="mb-6">
+      <div className="mb-8">
         <h1 className="text-3xl font-bold text-slate-800 font-heading">Projects</h1>
         <p className="text-slate-500 mt-1">Browse, manage, and track all projects and opportunities.</p>
-        <div className="flex justify-between items-center mt-4">
-            <div className="relative max-w-lg">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <SearchIcon className="h-5 w-5 text-slate-400" />
-                </div>
-                <input
-                    type="text"
-                    placeholder="Search by title, client, or keyword..."
-                    className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                />
-            </div>
-            <div className="flex items-center bg-slate-200 rounded-full p-1">
-                 <button 
-                    onClick={() => setViewMode('list')}
-                    className={`px-4 py-1.5 text-sm font-semibold rounded-full ${viewMode === 'list' ? 'bg-white text-primary shadow-sm' : 'text-slate-500'}`}
-                >
-                    List
-                </button>
-                 <button 
-                    onClick={() => setViewMode('board')}
-                    className={`px-4 py-1.5 text-sm font-semibold rounded-full ${viewMode === 'board' ? 'bg-white text-primary shadow-sm' : 'text-slate-500'}`}
-                >
-                    Board
-                </button>
-            </div>
-        </div>
+      </div>
+
+      <div className="flex justify-between items-center mb-6">
+          <div className="relative w-full max-w-sm">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <SearchIcon className="h-5 w-5 text-slate-400" />
+              </div>
+              <input
+                  type="text"
+                  placeholder="Search by title, client, or keyword..."
+                  className="w-full pl-11 pr-4 py-2 border border-slate-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+          </div>
+          <div className="flex items-center bg-slate-100 rounded-lg p-1">
+                <button 
+                  onClick={() => setViewMode('list')}
+                  className={`px-4 py-1.5 text-sm font-semibold rounded-md ${viewMode === 'list' ? 'bg-white text-primary shadow' : 'text-slate-500 hover:text-slate-700'}`}
+              >
+                  List
+              </button>
+                <button 
+                  onClick={() => setViewMode('board')}
+                  className={`px-4 py-1.5 text-sm font-semibold rounded-md ${viewMode === 'board' ? 'bg-white text-primary shadow' : 'text-slate-500 hover:text-slate-700'}`}
+              >
+                  Board
+              </button>
+          </div>
       </div>
       
       {viewMode === 'list' ? (

@@ -63,7 +63,7 @@ export interface User {
 
 export interface Notification {
   id: number;
-  title: string;
+  title:string;
   description: string;
   time: string;
   read: boolean;
@@ -119,3 +119,13 @@ export interface Invoice {
     dueDate: string;
     lineItems: InvoiceLineItem[];
 }
+
+export type SidebarLinkType = 'link' | 'header';
+
+export type SidebarLink = {
+    type: SidebarLinkType;
+    title: string;
+    iconName?: string;
+    page?: Page;
+    roles?: ('admin' | 'contractor')[];
+};

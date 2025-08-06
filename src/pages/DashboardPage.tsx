@@ -1,10 +1,10 @@
 import React from 'react';
 import StatCard from '../components/StatCard';
 import { useAuth } from '../contexts/AuthContext';
-import { Activity, Project, User, Task, Invoice, Page } from '../types';
+import type { Activity, Project, User, Task, Invoice, Page } from '../types';
 import { FileContractIcon, UsersIcon, CheckCircleIcon, ClockIcon, BillingIcon, FileAltIcon, CalendarAltIcon } from '../components/icons';
 import ActivityFeed from '../components/ActivityFeed';
-import { isAfter, isBefore, addDays, differenceInDays } from 'date-fns';
+import { isBefore, addDays, differenceInDays } from 'date-fns';
 
 interface DashboardPageProps {
     activities: Activity[];
@@ -16,9 +16,9 @@ interface DashboardPageProps {
 }
 
 const UrgentItem: React.FC<{ item: { type: 'task' | 'invoice'; title: string; dueText: string; page: Page; icon: React.ReactNode; isOverdue: boolean }, onClick: () => void }> = ({ item, onClick }) => (
-    <div className="p-3 bg-slate-50 rounded-lg flex items-center justify-between">
+    <div className="p-3 bg-slate-100 rounded-lg flex items-center justify-between">
         <div className="flex items-center gap-3">
-            <span className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full ${item.isOverdue ? 'bg-danger-light text-danger' : 'bg-warning-light text-warning'}`}>
+            <span className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full ${item.isOverdue ? 'bg-danger-light text-danger' : 'bg-warning-light text-warning-dark'}`}>
                 {item.icon}
             </span>
             <div>
@@ -84,10 +84,10 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ activities, projects, use
         .filter(i => i.status === 'sent' && isBefore(new Date(i.dueDate), oneWeekFromNow))
          .map(i => ({
             type: 'invoice' as const,
-            title: `Invoice #${2024}${String(i.id).padStart(3, '0')}`,
-    isOverdue: isBefore(new Date(i.dueDate), now),
-    dueText: getDueText(new Date(i.dueDate)),
-    page: 'billing' as Page,
+            title: `Invoice #${2024-0o0}${i.id}`,
+            isOverdue: isBefore(new Date(i.dueDate), now),
+            dueText: getDueText(new Date(i.dueDate)),
+            page: 'billing' as Page,
             icon: <BillingIcon className="w-5 h-5" />,
         }));
         
@@ -95,12 +95,12 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ activities, projects, use
 
     return (
         <div>
-            <div className="mb-6">
+            <div className="mb-8">
                 <h1 className="text-3xl font-bold text-slate-800 font-heading">Dashboard</h1>
-                <p className="text-slate-500">Welcome back, {user.name.split(' ')[0]}. Here's your firm's overview.</p>
+                <p className="text-slate-500 mt-1">Welcome back, {user.name.split(' ')[0]}. Here's your firm's overview.</p>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 {user.role === 'admin' ? (
                     <>
                         <StatCard title="Active Projects" value={stats.admin.activeProjects} icon={<FileContractIcon className="w-6 h-6"/>} />
@@ -120,7 +120,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ activities, projects, use
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 space-y-6">
-                    <section className="bg-white p-4 sm:p-6 rounded-lg shadow-sm">
+                    <section className="bg-white p-6 rounded-xl shadow-sm">
                          <div className="flex justify-between items-center mb-4">
                             <h2 className="text-xl font-bold text-slate-700 font-heading flex items-center gap-2">
                                 <CalendarAltIcon className="w-6 h-6 text-primary"/>
@@ -131,7 +131,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ activities, projects, use
                             {urgentItems.slice(0, 5).map((item, index) => (
                                 <UrgentItem key={index} item={item} onClick={() => setCurrentPage(item.page)} />
                             ))}
-                            {urgentItems.length === 0 && <p className="text-slate-500 text-center py-4">Nothing urgent on your plate. Well done!</p>}
+                            {urgentItems.length === 0 && <p className="text-slate-500 text-center py-8">Nothing urgent on your plate. Well done!</p>}
                         </div>
                     </section>
                 </div>

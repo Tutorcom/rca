@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProtectedRoute from '../components/ProtectedRoute';
-import { Page, User } from '../types';
+import type { Page, User } from '../types';
 import { UsersIcon, MailIcon, CheckCircleIcon, ChevronDownIcon } from '../components/icons';
 
 interface ClientManagementPageProps {
@@ -91,7 +91,7 @@ const ClientManagementPage: React.FC<ClientManagementPageProps> = ({ users, setU
                                         <td className="px-6 py-4">{client.companyName}</td>
                                         <td className="px-6 py-4">
                                             <div className="flex flex-wrap gap-1">
-                                                {client.tags.map(tag => (
+                                                {client.tags.map((tag: string) => (
                                                     <span key={tag} className="bg-slate-200 text-slate-600 px-2 py-0.5 text-xs font-medium rounded-full">{tag}</span>
                                                 ))}
                                             </div>

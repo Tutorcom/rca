@@ -1,7 +1,7 @@
 import React from 'react';
 import ProtectedRoute from '../components/ProtectedRoute';
 import { CheckCircleIcon, FileContractIcon } from '../components/icons';
-import { Project, Invoice, Task } from '../types';
+import type { Project, Invoice, Task } from '../types';
 
 interface AnalyticsPageProps {
     projects: Project[];

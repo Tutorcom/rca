@@ -1,6 +1,6 @@
 import React from 'react';
 import ProtectedRoute from '../components/ProtectedRoute';
-import { User, Task, Project } from '../types';
+import type { User, Task, Project } from '../types';
 
 interface TeamPageProps {
   admins: User[];

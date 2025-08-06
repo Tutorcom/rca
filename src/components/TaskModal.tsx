@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Project, User, Task } from '../types';
+import type { Project, User, Task } from '../types';
 import Modal from './Modal';
 
 interface TaskModalProps {

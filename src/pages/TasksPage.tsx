@@ -1,6 +1,6 @@
 import React from 'react';
 import ProtectedRoute from '../components/ProtectedRoute';
-import { Task, Project, User } from '../types';
+import type { Task, Project, User } from '../types';
 import { CheckCircleIcon, PlusIcon } from '../components/icons';
 import { useAuth } from '../contexts/AuthContext';
 

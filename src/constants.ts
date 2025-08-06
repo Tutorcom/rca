@@ -1,4 +1,4 @@
-import { Project, Application, Activity, Document, User, Notification, Page, ChatMessage, Task, Invoice } from './types';
+import type { Project, Application, Activity, Document, User, Notification, ChatMessage, Task, Invoice, SidebarLink } from './types';
 
 export const projects: Project[] = [
     {
@@ -124,7 +124,7 @@ export const activities: Activity[] = [
 export const documents: Document[] = [
     {
         id: 1,
-        name: "RCA Capabilities Statement.pdf",
+        name: "Company Capabilities Statement.pdf",
         type: "pdf",
         size: "2.4 MB",
         date: "Oct 15, 2023",
@@ -143,22 +143,22 @@ export const documents: Document[] = [
 export const users: User[] = [
     {
         id: 1,
-        name: "Antonio Rosado",
+        name: "Moni Roy",
         role: "admin",
-        email: "antonio@rca.com",
-        avatar: "AR",
-        companyName: "Rosado Commercial Advisors",
+        email: "moni@dashstack.com",
+        avatar: "MR",
+        companyName: "DashStack Inc.",
         status: 'active',
-        certifications: ["Licensed Real Estate Broker", "Certified Commercial Investment Member (CCIM)"],
+        certifications: ["Certified Admin", "Project Management Professional (PMP)"],
         tags: ['Admin', 'Founder']
     },
     {
         id: 2,
         name: "Maria Rodriguez",
         role: "admin",
-        email: "maria@rca.com",
+        email: "maria@dashstack.com",
         avatar: "MR",
-        companyName: "Rosado Commercial Advisors",
+        companyName: "DashStack Inc.",
         status: 'active',
         certifications: ["Project Management Professional (PMP)"],
         tags: ['Admin', 'Project Manager']
@@ -227,7 +227,7 @@ export const messages: ChatMessage[] = [
         id: 2,
         conversationId: '1_3',
         senderId: 3,
-        text: 'Hi Antonio, certainly. I have just uploaded our latest Certificate of Insurance to my profile. Let me know if you need anything else.',
+        text: 'Hi Moni, certainly. I have just uploaded our latest Certificate of Insurance to my profile. Let me know if you need anything else.',
         timestamp: '2024-05-20T10:05:00Z',
     },
 ];
@@ -245,28 +245,23 @@ export const invoices: Invoice[] = [
     { id: 3, clientId: 3, projectId: 4, amount: 5000, status: 'draft', issueDate: '2024-09-01', dueDate: '2024-10-01', lineItems: [{ description: 'Preliminary Network Design', quantity: 1, price: 5000}] },
 ];
 
-type SidebarLink = {
-    title: string;
-    iconName: string;
-    page: Page;
-    roles: ('admin' | 'contractor')[];
-};
-
 export const SIDEBAR_LINKS: SidebarLink[] = [
-    { title: 'Dashboard', iconName: 'HomeIcon', page: 'dashboard', roles: ['admin', 'contractor'] },
-    { title: 'Projects', iconName: 'FileContractIcon', page: 'projects', roles: ['admin', 'contractor'] },
-    { title: 'My Applications', iconName: 'FileAltIcon', page: 'applications', roles: ['contractor'] },
-    { title: 'Clients', iconName: 'UsersIcon', page: 'clients', roles: ['admin'] },
-    { title: 'Team', iconName: 'UsersIcon', page: 'team', roles: ['admin'] },
-    { title: 'Tasks', iconName: 'CheckCircleIcon', page: 'tasks', roles: ['admin', 'contractor'] },
-    { title: 'Billing', iconName: 'BillingIcon', page: 'billing', roles: ['admin', 'contractor'] },
-    { title: 'Messages', iconName: 'MailIcon', page: 'messages', roles: ['admin', 'contractor'] },
-    { title: 'Document Hub', iconName: 'FileArchiveIcon', page: 'document-hub', roles: ['admin'] },
-    { title: 'Analytics', iconName: 'ChartLineIcon', page: 'analytics', roles: ['admin'] },
+    { type: 'link', title: 'Dashboard', iconName: 'HomeIcon', page: 'dashboard', roles: ['admin', 'contractor'] },
+    { type: 'link', title: 'Projects', iconName: 'FileContractIcon', page: 'projects', roles: ['admin', 'contractor'] },
+    { type: 'link', title: 'My Applications', iconName: 'FileAltIcon', page: 'applications', roles: ['contractor'] },
+    { type: 'link', title: 'Clients', iconName: 'UsersIcon', page: 'clients', roles: ['admin'] },
+    { type: 'link', title: 'Team', iconName: 'UsersIcon', page: 'team', roles: ['admin'] },
     
+    { type: 'header', title: 'Tools' },
+    
+    { type: 'link', title: 'Tasks', iconName: 'CheckCircleIcon', page: 'tasks', roles: ['admin', 'contractor'] },
+    { type: 'link', title: 'Billing', iconName: 'BillingIcon', page: 'billing', roles: ['admin', 'contractor'] },
+    { type: 'link', title: 'Messages', iconName: 'MailIcon', page: 'messages', roles: ['admin', 'contractor'] },
+    { type: 'link', title: 'Document Hub', iconName: 'FileArchiveIcon', page: 'document-hub', roles: ['admin'] },
+    { type: 'link', title: 'Analytics', iconName: 'ChartLineIcon', page: 'analytics', roles: ['admin'] },
 ];
 
 export const SIDEBAR_BOTTOM_LINKS: SidebarLink[] = [
-    { title: 'My Profile', iconName: 'UserTieIcon', page: 'profile', roles: ['admin', 'contractor'] },
-    { title: 'Settings', iconName: 'CogIcon', page: 'settings', roles: ['admin', 'contractor'] },
+    { type: 'link', title: 'My Profile', iconName: 'UserTieIcon', page: 'profile', roles: ['admin', 'contractor'] },
+    { type: 'link', title: 'Settings', iconName: 'CogIcon', page: 'settings', roles: ['admin', 'contractor'] },
 ];

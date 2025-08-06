@@ -1,7 +1,7 @@
 import React from 'react';
 import ProtectedRoute from '../components/ProtectedRoute';
 import { useAuth } from '../contexts/AuthContext';
-import { Document } from '../types';
+import type { Document, User } from '../types';
 import { FileArchiveIcon, FilePdfIcon, FileWordIcon, DownloadIcon, TrashIcon } from '../components/icons';
 
 interface DocumentHubPageProps {
@@ -12,7 +12,7 @@ const DocumentHubPage: React.FC<DocumentHubPageProps> = ({ documents }) => {
     const { users } = useAuth();
 
     const getUserNameById = (id: number) => {
-        const user = users.find(u => u.id === id);
+        const user = users.find((u: User) => u.id === id);
         return user ? user.name : 'Unknown User';
     }
 

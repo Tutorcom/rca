@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Project, AiMessage } from '../types';
+import type { Project, AiMessage } from '../types';
 import { SparklesIcon, CloseIcon, PaperAirplaneIcon, UserCircleIcon, BotIcon } from './icons';
 import { generateAiContent } from '../services/geminiService';
 import { useAuth } from '../contexts/AuthContext';
